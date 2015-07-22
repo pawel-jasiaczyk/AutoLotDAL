@@ -1,0 +1,6 @@
+/home/pawel/MonoDevelop/Troelsen/ADO.NET/AutoLotDAL/AutoLotDAL/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/pawel/MonoDevelop/Troelsen/ADO.NET/AutoLotDAL/AutoLotDAL/bin/Debug/AutoLotDAL.dll.mdb
+/home/pawel/MonoDevelop/Troelsen/ADO.NET/AutoLotDAL/AutoLotDAL/bin/Debug/AutoLotDAL.dll
+/home/pawel/MonoDevelop/Troelsen/ADO.NET/AutoLotDAL/AutoLotDAL/obj/Debug/AutoLotDAL.dll
+/home/pawel/MonoDevelop/Troelsen/ADO.NET/AutoLotDAL/AutoLotDAL/obj/Debug/AutoLotDAL.dll.mdb
+/home/pawel/MonoDevelop/Troelsen/ADO.NET/AutoLotDAL/AutoLotDAL/bin/Debug/MySql.Data.dll
