@@ -1,8 +1,8 @@
-﻿<Properties StartupItem="AutoLotDAL/AutoLotDAL.csproj">
+﻿<Properties StartupItem="AutoLotDAL/AutoLotDAL.csproj" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="AutoLotDAL/AutoLotConnDAL.cs">
     <Files>
-      <File FileName="AutoLotDAL/AutoLotConnDAL.cs" Line="14" Column="3" />
+      <File FileName="AutoLotDAL/AutoLotConnDAL.cs" Line="57" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
