@@ -105,7 +105,7 @@ namespace AutoLotConnectionLayer
 
 			// polecenie
 			string sql = "SELECT * FROM Inventory";
-			using (MySqlCommand cmd = new MySqlCommand ()) {
+			using (MySqlCommand cmd = new MySqlCommand (sql, this.sqlCn)) {
 				MySqlDataReader dr = cmd.ExecuteReader ();
 				while (dr.Read ()) {
 					inv.Add (new NewCar {

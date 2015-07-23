@@ -33,6 +33,7 @@
       <HintPath>..\..\..\..\..\Pakiety\mysql-connector-net-6.9.6-noinstall\v4.0\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
