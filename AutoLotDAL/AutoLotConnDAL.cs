@@ -42,7 +42,7 @@ namespace AutoLotConnectionLayer
 		public void InsertAuto(int id, string color, string make, string petName)
 		{
 			string sql = string.Format ("INSERT INTO Inventory" +
-			             "VALUES (@CarID, @Make, @Color, @PetName)");
+			             " VALUES (@CarID, @Make, @Color, @PetName)");
 			using (MySqlCommand cmd = new MySqlCommand (sql, this.sqlCn)) {
 				MySqlParameter param = new MySqlParameter ();
 				param.ParameterName = "@CarID";
@@ -58,7 +58,7 @@ namespace AutoLotConnectionLayer
 				cmd.Parameters.Add (param);
 
 				param = new MySqlParameter ();
-				param.ParameterName = "Color";
+				param.ParameterName = "@Color";
 				param.Value = color;
 				param.MySqlDbType = MySqlDbType.VarChar;
 				param.Size = 50;
@@ -72,8 +72,8 @@ namespace AutoLotConnectionLayer
 				cmd.Parameters.Add (param);
 
 				cmd.ExecuteNonQuery ();
+
 			}
-			
 		}
 		/// <summary>
 		/// Inserts new auto using NewCar class.
