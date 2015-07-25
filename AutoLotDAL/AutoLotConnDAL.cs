@@ -170,6 +170,7 @@ namespace AutoLotConnectionLayer
 			string carPetName = string.Empty;
 
 			using (MySqlCommand cmd = new MySqlCommand ("GetPetName", this.sqlCn)) {
+				cmd.CommandType = CommandType.StoredProcedure;
 
 				// input parameters
 				MySqlParameter param = new MySqlParameter ();
