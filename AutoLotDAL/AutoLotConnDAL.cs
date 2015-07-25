@@ -25,7 +25,6 @@ namespace AutoLotConnectionLayer
 			sqlCn.ConnectionString = connectionString;
 			sqlCn.Open ();
 		}
-
 		/// <summary>
 		/// Closes the connection.
 		/// </summary>
@@ -33,7 +32,6 @@ namespace AutoLotConnectionLayer
 		{
 			sqlCn.Clone ();
 		}
-
 		/// <summary>
 		/// Inserts new auto to Inventory table.
 		/// </summary>
@@ -44,12 +42,39 @@ namespace AutoLotConnectionLayer
 		public void InsertAuto(int id, string color, string make, string petName)
 		{
 			string sql = string.Format ("INSERT INTO Inventory" +
-			             "VALUES ({0}, '{1}', '{2}', '{3}')", id, make, color, petName);
+			             "VALUES (@CarID, @Make, @Color, @PetName)");
 			using (MySqlCommand cmd = new MySqlCommand (sql, this.sqlCn)) {
+				MySqlParameter param = new MySqlParameter ();
+				param.ParameterName = "@CarID";
+				param.Value = id;
+				param.MySqlDbType = MySqlDbType.UInt32;
+				cmd.Parameters.Add (param);
+
+				param = new MySqlParameter ();
+				param.ParameterName = "@Make";
+				param.Value = make;
+				param.MySqlDbType = MySqlDbType.VarChar;
+				param.Size = 50;
+				cmd.Parameters.Add (param);
+
+				param = new MySqlParameter ();
+				param.ParameterName = "Color";
+				param.Value = color;
+				param.MySqlDbType = MySqlDbType.VarChar;
+				param.Size = 50;
+				cmd.Parameters.Add (param);
+
+				param = new MySqlParameter ();
+				param.ParameterName = "@PetName";
+				param.Value = petName;
+				param.MySqlDbType = MySqlDbType.VarChar;
+				param.Size = 50;
+				cmd.Parameters.Add (param);
+
 				cmd.ExecuteNonQuery ();
 			}
+			
 		}
-
 		/// <summary>
 		/// Inserts new auto using NewCar class.
 		/// </summary>
@@ -62,8 +87,7 @@ namespace AutoLotConnectionLayer
 				cmd.ExecuteNonQuery ();
 			}
 		}
-
-		/// <summary>
+		// <summary>
 		/// Deletes the car from Inventory table.
 		/// </summary>
 		/// <param name="id">Identifier.(CarID)</param>
@@ -134,6 +158,43 @@ namespace AutoLotConnectionLayer
 				dr.Close ();
 			}
 			return inv;
+		}
+		/// <summary>
+		/// Calls Stored Procedure from AutoLot and 
+		/// returns the PetName of a Car with specified CarID.
+		/// </summary>
+		/// <returns>Car's PetName</returns>
+		/// <param name="carID">CarID</param>
+		public string LookUpPetName(int carID)
+		{
+			string carPetName = string.Empty;
+
+			using (MySqlCommand cmd = new MySqlCommand ("GetPetName", this.sqlCn)) {
+
+				// input parameters
+				MySqlParameter param = new MySqlParameter ();
+				param.ParameterName = "@carID";
+				param.MySqlDbType = MySqlDbType.UInt32;
+				param.Value = carID;
+
+				param.Direction = ParameterDirection.Input;
+				cmd.Parameters.Add (param);
+
+				// output parameters
+				param = new MySqlParameter();
+				param.ParameterName = "@petName";
+				param.MySqlDbType = MySqlDbType.VarChar;
+				param.Size = 50;
+				param.Direction = ParameterDirection.Output;
+				cmd.Parameters.Add (param);
+
+				// execute stored procedure
+				cmd.ExecuteNonQuery();
+
+				// return output parameter
+				carPetName = (string)cmd.Parameters["@petName"].Value;
+			}
+			return carPetName;
 		}
 	}
 	/// <summary>

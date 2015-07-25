@@ -1,0 +1,58 @@
+﻿CREATE DATABASE AutoLot;
+USE AutoLot;
+
+CREATE USER 'troelsen'@'localhost' IDENTIFIED BY 'pass';
+GRANT ALL ON  AutoLot.* TO 'troelsen'@'localhost' ;
+
+
+CREATE TABLE Inventory (
+	CarID INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT , 
+	Make VARCHAR(50) NULL, 
+	Color VARCHAR(50) NULL, 
+	PetName VARCHAR(50) NOT NULL);
+
+INSERT INTO Inventory VALUES(NULL, 'Ford', 'Yellow', 'Star');
+INSERT INTO Inventory VALUES(NULL, 'BMW', 'Green', 'Fred');
+INSERT INTO Inventory VALUES(NULL, 'Fiat', 'Black', 'BlackHole');
+INSERT INTO Inventory VALUES(NULL, 'Audi', 'Red', 'Devil');
+INSERT INTO Inventory VALUES(NULL, 'Ford', 'White', 'Arrow');
+INSERT INTO Inventory VALUES(NULL, 'Fiat', 'Green', 'Turtle');
+INSERT INTO Inventory VALUES(NULL, 'Toyota', 'Pink', 'Kamikaze');
+INSERT INTO Inventory VALUES(NULL, 'Saab', 'Yellow', 'Karl');
+
+SELECT * FROM Inventory;
+
+delimiter //
+CREATE PROCEDURE GetPetName(IN carID INT UNSIGNED, OUT petName VARCHAR(50)) 
+BEGIN SELECT Inventory.PetName INTO petName FROM Inventory WHERE Inventory.CarID=carID; 
+END //
+delimiter ;
+
+CREATE TABLE Customers( 
+	CustID INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+	FirstName VARCHAR(50) NULL, 
+	LastName VARCHAR(50) NULL); 
+
+INSERT INTO Customers VALUES(NULL, 'Homer', 'Simpson');
+INSERT INTO Customers VALUES(NULL, 'Fred', 'Flintstone');
+INSERT INTO Customers VALUES(NULL, 'Al', 'Bundy');
+INSERT INTO Customers VALUES(NULL, 'Ferdek', 'Kiepski');
+INSERT INTO Customers VALUES(NULL, 'Jack', 'Sparrow');
+INSERT INTO Customers VALUES(NULL, 'Luke', 'Skywalker');
+
+SELECT * FROM Customers;
+
+CREATE TABLE Orders (
+	OrderID INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+	CustID INT UNSIGNED NOT NULL, 
+	CarID INT UNSIGNED NOT NULL);
+ALTER TABLE Orders ADD FOREIGN KEY (CustID) REFERENCES Customers(CustID);
+ALTER TABLE Orders ADD FOREIGN KEY (CarID) REFERENCES Inventory(CarID);
+ALTER TABLE Orders AUTO_INCREMENT=1001;
+
+INSERT INTO Orders VALUES(NULL, 1, 2);
+INSERT INTO Orders VALUES(NULL, 3, 5);
+INSERT INTO Orders VALUES(NULL, 2, 6);
+INSERT INTO Orders VALUES(NULL, 5, 3);
+
+SELECT * FROM Orders;
